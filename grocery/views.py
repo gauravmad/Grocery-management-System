@@ -20,10 +20,14 @@ def SignUpPage(request):
         if pass1!=pass2:
             return render(request,"signup.html",{'status1':status1})
         else:
-            my_user=User.objects.create_user(uname,email,pass1)
-            my_user.save()
+            try:
+                existing_user = User.objects.get(email=email)
+                status="<p style='color:red';>User already exists!! Please Sign in</p>"
+            except User.DoesNotExist:    
+                my_user=User.objects.create_user(uname,email,pass1)
+                my_user.save()
+                status="<p style='color:green';>Your Account has been created successfully! &#128512;</p>"
             
-        status="Your Account has been created successfully! &#128512;"
     return render(request,"signup.html",{'status':status})
 
 def LoginPage(request):
