@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
 def SignUpPage(request):
@@ -14,6 +14,8 @@ def SignUpPage(request):
         pass2= request.POST.get('password2')
 
         status1="Password doesn't match!!"
+
+
         if pass1!=pass2:
             return render(request,"signup.html",{'status1':status1})
         else:
@@ -31,14 +33,18 @@ def LoginPage(request):
         user=authenticate(request,username=username, password=pass1)
 
         status2="Username or Password is incorrect"
-        
+
         if user is not None:
             login(request,user)
             return redirect('home')
         else:
             return render(request,"login.html",{'status2':status2})
-
+        
     return render(request,"login.html")
 
 def home(request):
-    return render(request,"home.html")
+    return render(request,"home.html",{'username':request.user.username})
+
+def LogoutPage(request):
+    logout(request)
+    return redirect('login')
