@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
+
 def SignUpPage(request):
     status=''
     status1=''
@@ -42,6 +43,7 @@ def LoginPage(request):
         
     return render(request,"login.html")
 
+@login_required(login_url="/login/")
 def home(request):
     return render(request,"home.html",{'username':request.user.username})
 
