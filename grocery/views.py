@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
+from groceryproducts.models import category
+
 def SignUpPage(request):
     status=''
     status1=''
@@ -48,7 +50,19 @@ def LoginPage(request):
 
 @login_required(login_url="/login/")
 def home(request):
-    return render(request,"home.html",{'username':request.user.username})
+    categories = category.objects.all()
+    if request.user.is_superuser:
+        message = "Welcome Admin!"
+    else:
+        message = "Welcome " + request.user.username + "!"
+        
+    context = {
+        'categories': categories,
+        'message': message
+    }
+    
+    return render(request, "home.html", context)
+
 
 def LogoutPage(request):
     logout(request)
