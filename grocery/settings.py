@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'grocery',
     'groceryproducts',
+    'rest_framework',
 ]
 
-MIDDLEWARE = [
+CORS_ORIGIN_ALLOW_ALL = True
+
+MIDDLEWARE = [ 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

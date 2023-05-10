@@ -20,12 +20,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 from grocery import views
 
+from groceryproducts.views import GroceryList, GroceryDetail
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.SignUpPage, name="signup"),
     path("login/",views.LoginPage, name="login"),
     path("home/",views.home, name="home"),
-    path('logout/',views.LogoutPage,name="logout")
+    path('logout/',views.LogoutPage,name="logout"),
+    path('groceries/', GroceryList.as_view(), name='grocery-list'),
+    path('products/', views.Products, name="product" ),
+    path('groceries/<int:pk>/', GroceryDetail.as_view(), name='grocery-detail'),
 ]
 
 

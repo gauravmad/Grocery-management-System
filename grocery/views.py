@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
 from groceryproducts.models import category
+from groceryproducts.models import Product
 
 def SignUpPage(request):
     status=''
@@ -67,3 +68,7 @@ def home(request):
 def LogoutPage(request):
     logout(request)
     return redirect('login')
+
+def Products(request):
+    products = Product.objects.all()
+    return render(request,"product.html",{'products':products})

@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+{% block content %}
+
+<!-- Our Categories -->
+<h1 class="mb-10 my-10 text-4xl text-center font-semibold text-[#F98821]">Products</h1>
+<div class="categories grid grid-cols-4 gap-3 w-[85vw] m-auto mb-10">
+    {% for Product in products %}
+    <div class="caty shadow-lg border rounded-3xl">
+        <img src="/media/{{Product.product_img}}" alt="" class="w-[20rem]">
+        <p class="text-center font-semibold text-xl">{{Product.product_title}}</p>
+        <p class="text-center font-semibold text-xl">{{Product.product_price}}</p>
+
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
