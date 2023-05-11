@@ -29,10 +29,13 @@ urlpatterns = [
     path("home/",views.home, name="home"),
     path('logout/',views.LogoutPage,name="logout"),
     path('groceries/', GroceryList.as_view(), name='grocery-list'),
-    path('products/', views.Products, name="product" ),
+    path('products/<int:product_id>/', views.Products, name='products'),
+    path('products/', views.Products, name='all_products'),
+    path('cart/', views.cart, name="cart" ),
+    path('add_to_cart/<int:product_id>/', views.add_to_cart, name="add_to_cart" ),
     path('groceries/<int:pk>/', GroceryDetail.as_view(), name='grocery-detail'),
+    path('payment/',views.payment,name='payment')
 ]
-
 
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
