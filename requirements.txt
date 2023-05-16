@@ -22,6 +22,7 @@ oauth2-provider==0.0
 packaging==23.1
 Pillow==9.5.0
 prettytable==3.7.0
+psycopg2==2.9.6
 pyotp==2.8.0
 pyparsing==3.0.9
 pypng==0.20220715.0
